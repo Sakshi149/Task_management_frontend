@@ -8,7 +8,7 @@ import {
   Button,
   Autocomplete,
 } from "@mui/material";
-import axios from "axios";
+import api from "./api";
 
 const options = ["Pending", "In Progress", "Completed"];
 
@@ -32,17 +32,14 @@ const EditTaskDialog = ({ open, onClose, task, onUpdate }) => {
     }
 
     try {
-      await axios.put(`http://localhost:8080/api/v1/tasks/${task.id}`, {
-        title,
-        description,
-        status,
-      });
+      await api.put(`/tasks/${task.id}`, { title, description, status });
 
       onUpdate({ ...task, title, description, status });
-      onClose();
       alert("Edited Successfully");
+      onClose();
     } catch (error) {
       console.error("Error updating task:", error);
+      alert("Failed to update task. Please try again.");
     }
   };
 
@@ -56,9 +53,7 @@ const EditTaskDialog = ({ open, onClose, task, onUpdate }) => {
           variant="outlined"
           margin="normal"
           value={title}
-          onChange={(e) =>
-            setTitle(e.target.value.replace(/[^a-zA-Z]/gi, ""))
-          }
+          onChange={(e) => setTitle(e.target.value)}
           required
         />
         <TextField
@@ -67,16 +62,14 @@ const EditTaskDialog = ({ open, onClose, task, onUpdate }) => {
           variant="outlined"
           margin="normal"
           value={description}
-          onChange={(e) =>
-            setDescription(e.target.value.replace(/[^a-zA-Z]/gi, ""))
-          }
+          onChange={(e) => setDescription(e.target.value)}
         />
         <Autocomplete
           disablePortal
           options={options}
           sx={{ width: "100%", marginTop: 2 }}
           value={status}
-          onChange={(event, newValue) => setStatus(newValue || "")}
+          onChange={(event, newValue) => setStatus(newValue || "Pending")}
           renderInput={(params) => <TextField {...params} label="Status" />}
         />
       </DialogContent>
@@ -84,7 +77,7 @@ const EditTaskDialog = ({ open, onClose, task, onUpdate }) => {
         <Button onClick={onClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleEdit} color="primary">
+        <Button onClick={handleEdit} color="primary" variant="contained">
           Save
         </Button>
       </DialogActions>
