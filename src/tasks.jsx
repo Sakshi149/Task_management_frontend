@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   Container,
   Table,
@@ -22,6 +21,7 @@ import AddTask from "./Add";
 import { deleteTask } from "./Delete";
 import EditTaskDialog from "./Edit";
 import TaskDetailsDialog from "./Details";
+import api from "./api";
 
 const Tasks = () => {
   // For fetching tasks from api using pagination from the backend along with searching tasks
@@ -35,12 +35,12 @@ const Tasks = () => {
 
   const fetchTasks = async (newPage = page, newRowsPerPage = rowsPerPage) => {
     setLoading(true);
+
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/v1/tasks?page=${
-          newPage + 1
-        }&limit=${newRowsPerPage}`
+      const response = await api.get(
+        `/tasks?page=${newPage + 1}&limit=${newRowsPerPage}`,
       );
+      
 
       setTasks(response.data.tasks || []);
       setFilteredTasks(response.data.tasks || []);
@@ -75,7 +75,7 @@ const Tasks = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/tasks`, {
+      const response = await api.get(`/tasks`, {
         params: {
           q: query,
         },
@@ -115,8 +115,8 @@ const Tasks = () => {
   const handleOpenDetails = async (taskId) => {
     setLoadingDetails(true);
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/v1/tasks/${taskId}`
+      const response = await api.get(
+        `/tasks/${taskId}`
       );
 
       console.log("Task details response:", response.data);
