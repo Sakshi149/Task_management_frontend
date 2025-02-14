@@ -9,6 +9,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import api from "./api";
 
 const AddTask = ({ onTaskAdded }) => {
   const [open, setOpen] = useState(false);
@@ -34,7 +35,7 @@ const AddTask = ({ onTaskAdded }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/tasks", {
+      const response = await api.post("/tasks", {
         title,
         description,
         status,
