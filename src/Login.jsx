@@ -41,9 +41,13 @@ const Login = () => {
 
       console.log("Login successful:", response.data);
       // alert("Login successful!");
+      
+      const {accessToken, refreshToken} = response.data
 
       //   navigate(`/tasks?token=${response.data.token}`);
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+
       navigate("/tasks");
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
