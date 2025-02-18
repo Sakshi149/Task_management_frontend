@@ -6,8 +6,10 @@ import AccountMenu from "./AccountMenu";
 const Header = () => {
   const location = useLocation();
 
-  const showAccountMenu = location.pathname === "/tasks";
-  const showLoginRegister = location.pathname !== "/tasks";
+  // const showAccountMenu = location.pathname === "/tasks";
+  // const showLoginRegister = location.pathname !== "/tasks";
+
+  const isAuthenticated = Boolean(localStorage.getItem("token")); 
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -31,7 +33,7 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box>
+          {/* <Box>
             {showLoginRegister && (
               <>
                 <Button component={Link} to="/" color="info">
@@ -43,6 +45,20 @@ const Header = () => {
               </>
             )}
             {showAccountMenu && <AccountMenu />}
+          </Box> */}
+          <Box>
+            {!isAuthenticated ? (
+              <>
+                <Button component={Link} to="/" color="info">
+                  <strong>Login</strong>
+                </Button>
+                <Button component={Link} to="/register" color="info">
+                  <strong>Register</strong>
+                </Button>
+              </>
+            ) : (
+              <AccountMenu />
+            )}
           </Box>
         </Toolbar>
       </AppBar>
