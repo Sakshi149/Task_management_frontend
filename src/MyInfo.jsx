@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Typography, TextField, CircularProgress, Alert, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const MyInfo = () => {
   const [user, setUser] = useState(null);
@@ -13,6 +14,7 @@ const MyInfo = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -54,10 +56,15 @@ const MyInfo = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setSuccessMessage("Password changed successfully!");
+      // alert('Password Changed successfully')
       setError(null);
       setCurrentPassword("");
       setNewPassword("");
       setConfirmNewPassword("");
+
+      setTimeout(() => {
+        navigate('/tasks')
+      }, 2000)
     } catch (err) {
       console.error("Error changing password:", err);
       setError("Failed to change password.");
