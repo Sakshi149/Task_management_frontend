@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Tasks from './tasks'
-import Header from './Header'
-import Register from './Register'
-import Login from './login'
-import Logout from './logout'
-import MyInfo from './MyInfo'
+import Tasks from './pages/Tasks/tasks'
+import Header from './components/Header'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import Logout from './pages/logout'
+import MyInfo from './pages/MyInfo'
 
 const App = () => {
   return (

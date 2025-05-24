@@ -9,7 +9,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import api from "./api";
+import api from "../../api/api";
 
 const AddTask = ({ onTaskAdded }) => {
   const [open, setOpen] = useState(false);
