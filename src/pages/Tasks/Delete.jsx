@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "../../api/api";
 
 export const deleteTask = async (taskId, setTasks, tasks) => {
   const confirmDelete = window.confirm(

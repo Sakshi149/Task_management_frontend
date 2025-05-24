@@ -16,12 +16,12 @@ import {
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import DescriptionIcon from "@mui/icons-material/Description";
-import SearchBar from "./Search";
+import SearchBar from "../../components/Search";
 import AddTask from "./Add";
 import { deleteTask } from "./Delete";
 import EditTaskDialog from "./Edit";
 import TaskDetailsDialog from "./Details";
-import api from "./api";
+import api from "../../api/api";
 
 const Tasks = () => {
   // For fetching tasks from api using pagination from the backend along with searching tasks

@@ -8,7 +8,7 @@ import {
   Button,
   Autocomplete,
 } from "@mui/material";
-import api from "./api";
+import api from "../../api/api";
 
 const options = ["Pending", "In Progress", "Completed"];
 
